@@ -1,0 +1,128 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMBERFALL — A Duel of Elements</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="embers" aria-hidden="true"></div>
+<div id="app">
+
+  <!-- ============ TITLE ============ -->
+  <section id="screen-title" class="screen active" aria-label="Title screen">
+    <div class="title-wrap">
+      <div class="crest" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="112" height="112">
+          <defs>
+            <linearGradient id="crestG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffd47a"/><stop offset="0.5" stop-color="#ff8a3c"/><stop offset="1" stop-color="#c43b2b"/>
+            </linearGradient>
+          </defs>
+          <path d="M60 6 L92 24 V60 C92 85 76 104 60 114 C44 104 28 85 28 60 V24 Z" fill="none" stroke="url(#crestG)" stroke-width="3"/>
+          <path d="M60 22 C72 40 48 48 60 64 C72 80 48 86 60 100" fill="none" stroke="url(#crestG)" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#ffd47a" stroke-width="0.7" opacity=".5"/>
+        </svg>
+      </div>
+      <p class="eyebrow">A DUEL OF ELEMENTS</p>
+      <h1 class="game-title">EMBERFALL</h1>
+      <div class="title-rule"><span></span><i>◆</i><span></span></div>
+      <p class="tagline">Two alchemists. Four elements. One last ember.</p>
+      <div class="title-actions">
+        <button id="btn-start" class="btn btn-primary">BEGIN DUEL <span class="key">ENTER</span></button>
+        <button id="btn-rules-title" class="btn btn-ghost">HOW TO PLAY</button>
+      </div>
+      <p class="title-foot">Summon elementals · Bend the elements · Break your rival's resolve</p>
+    </div>
+    <div class="corner tl"></div><div class="corner tr"></div>
+    <div class="corner bl"></div><div class="corner br"></div>
+  </section>
+
+  <!-- ============ BATTLE ============ -->
+  <section id="screen-battle" class="screen" aria-label="Battle table">
+    <header class="battle-top">
+      <div class="brand-small"><span class="brand-mark">◆</span> EMBERFALL</div>
+      <div class="turn-plate">
+        <span id="turn-label" class="turn-label">YOUR TURN</span>
+        <span class="turn-sep">·</span>
+        <span id="round-label" class="round-label">ROUND 1</span>
+      </div>
+      <div class="top-actions">
+        <button id="btn-sound" class="icon-btn" title="Toggle sound">♪</button>
+        <button id="btn-rules" class="icon-btn" title="How to play">?</button>
+      </div>
+    </header>
+
+    <div class="table">
+      <!-- opponent -->
+      <div class="row row-enemy">
+        <div id="enemy-hero" class="hero-slot enemy-hero"></div>
+        <div class="field-side">
+          <div id="enemy-hand" class="hand enemy-hand" aria-label="Opponent hand"></div>
+          <div id="enemy-board" class="board" aria-label="Opponent battlefield"></div>
+        </div>
+        <div id="enemy-deck" class="deck-slot enemy-deck"></div>
+      </div>
+
+      <div class="midline">
+        <span class="mid-orn">✦</span>
+        <span id="hint-bar" class="hint-bar">Click a card in your hand to play it.</span>
+        <span class="mid-orn">✦</span>
+      </div>
+
+      <!-- player -->
+      <div class="row row-player">
+        <div id="player-hero" class="hero-slot player-hero"></div>
+        <div class="field-side">
+          <div id="player-board" class="board" aria-label="Your battlefield"></div>
+          <div id="player-hand" class="hand player-hand" aria-label="Your hand"></div>
+        </div>
+        <div class="deck-controls">
+          <div id="player-deck" class="deck-slot"></div>
+          <button id="end-turn-btn" class="btn btn-end">END TURN <span class="key">SPACE</span></button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="battle-bottom">
+      <div id="battle-log" class="battle-log">The duel begins. Your move, alchemist.</div>
+      <div class="legend"><span class="dot ember"></span>Ember <span class="dot tide"></span>Tide <span class="dot grove"></span>Grove <span class="dot storm"></span>Storm</div>
+    </footer>
+  </section>
+
+  <!-- ============ END ============ -->
+  <section id="screen-end" class="screen" aria-label="Result screen">
+    <div class="end-wrap">
+      <div id="end-sigil" class="end-sigil">✦</div>
+      <p id="end-eyebrow" class="eyebrow">THE DUEL IS OVER</p>
+      <h2 id="end-title" class="end-title">VICTORY</h2>
+      <p id="end-sub" class="end-sub"></p>
+      <div id="end-stats" class="end-stats"></div>
+      <button id="btn-again" class="btn btn-primary">DUEL AGAIN <span class="key">ENTER</span></button>
+    </div>
+  </section>
+
+  <!-- ============ RULES ============ -->
+  <div id="rules-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="How to play">
+    <div class="modal-card">
+      <button id="rules-close" class="modal-close" aria-label="Close">×</button>
+      <h3>HOW TO PLAY</h3>
+      <p class="modal-lede">Reduce your rival alchemist from <b>30</b> life to zero. Your own life must hold.</p>
+      <div class="rules-grid">
+        <div><b>1 · Mana</b><span>Your crystals refill each turn and grow to 10. Cards cost mana; the number in the top-left gem.</span></div>
+        <div><b>2 · Play</b><span>Click a card in your hand, then click an empty slot on your battlefield (or a target for spells).</span></div>
+        <div><b>3 · Attack</b><span>Click one of your ready creatures, then click a foe creature or the rival alchemist. Each strikes once per turn unless it has Swift.</span></div>
+        <div><b>4 · Turn</b><span>Press Space or End Turn. New turn = refill mana, draw a card, ready your creatures.</span></div>
+      </div>
+      <p class="modal-keys">Keywords: <b>Rush</b> ready on entry · <b>Guard</b> forces all attacks onto it first · <b>Ward</b> immune to spells · <b>Bulwark</b> takes 1 less damage · <b>Swift</b> strikes twice · <b>Burn</b> damages the rival on entry.</p>
+      <p class="modal-keys">Keys: <kbd>1</kbd>–<kbd>9</kbd> play card · <kbd>Space</kbd> end turn · <kbd>Esc</kbd> cancel · <kbd>Shift</kbd>+<kbd>R</kbd> restart</p>
+    </div>
+  </div>
+
+  <div id="fx-layer" aria-hidden="true"></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# local build artefacts — never part of the entry
+kit.tar.gz
+headers.txt
+requirements.json
+fetch-kit.sh
+KIT_READY
+KIT_FAILED
+*-kit/
+cdp.mjs
+shots.json
+chrome-profile/
+chrome.log
+t.tar.gz
+out/
+screenshot-backup/
+playtest*.json
+shots*.json
+JUHE-review.txt
+repo-notes.txt
+play-capture.mjs
+*.log
